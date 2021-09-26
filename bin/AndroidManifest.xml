@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.strastar.zolamansuperaction"
+    android:installLocation="auto"
+    android:versionCode="1"
+    android:versionName="1.0.5" >
+
+    <!--
+    * 880f150807895b494845b485c4bf9a4010de5e7525a784cc98e5a95290ec6610
+    * lgu용 880f150807895b494845b485c4bf9a40578b77092aa43337350ddb338b128567b88a0a3b6f7bdfce8fea1044faa5ae98 
+    -->
+
+
+    <!--
+    * 졸라맨 작업사항.
+    1. string.xml app_name 변경 
+    2. add_chapter1.xml(하나의 파일에 5개 카툰) 파일 갯수 조정.
+       갯수 이외의 것은 <Framelayout> android:visibility="invisible" 시키기
+    3. MainTable.java 소스 수정 
+    		R.layout.add_chapter2 갯수 조정.
+    		commandButtonText() / commandButton() / addhook() / checkReadingFlag() / onClick()
+    		 메소드내 갯수대로 주석처리.
+    4. res/drawable/img_book_XX.xml 파일을 만화책 갯수만큼 조정 
+    5. com/strastar/zolaman/classlist/Common.java 상수값 수정
+    	CARTOON_NAME 수정.
+    6. com/strastar/zolaman/classlist/CartoonInfo.java 상수값 수정 
+    	DEF_PREF_BOOKLIST 수정.
+    -->
+
+    <application
+        android:debuggable="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+
+        <!-- skt/kt/lgu -->
+        <activity
+            android:name="com.android.iabkr.plugin"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <meta-data
+                android:name="IABKRLICENSE"
+                android:value="KEY=880f150807895b494845b485c4bf9a4010de5e7525a784cc98e5a95290ec6610,STORE=skt" />
+        </activity>
+        <!-- SKT -->
+        <!--
+건즈 스페셜 2권: 0900616512
+건즈 스페셜 3권: 0900616513
+건즈 스페셜 4권: 0900616514
+건즈 스페셜 5권: 0900616515
+        -->
+        <activity
+            android:name="com.android.iabkr.skt"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <meta-data
+                android:name="IABKRITEMS"
+                android:value="AID=OA00305272,PID2=0900632621,PID3=0900632622,PID4=0900632624,PID5=0900632625,PID6=0900632626" />
+        </activity>
+        <activity
+            android:name="com.feelingk.iap.PwdActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <receiver android:name="com.feelingk.iap.SmsReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <!--
+LGU
+		상품 ID: Q18010151101
+PID:
+건즈 스페셜 2권: Q18D10304821
+건즈 스페셜 3권: Q18D10304822
+건즈 스페셜 4권: Q18D10304823
+건즈 스페셜 5권: Q18D10304824
+        -->
+        <activity
+            android:name="com.android.iabkr.lgu"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <meta-data
+                android:name="IABKRITEMS"
+                android:value="AID=Q18010311374,PID2=Q18D10311391,PID3=Q18D10311392,PID4=Q18D10311393,PID5=Q18D10311394,PID6=Q18D10311396" />
+        </activity>
+        <activity
+            android:name="com.feelingk.lguiab.manager.gui.InAppLockActivity"
+            android:label="@string/app_name" />
+        <!--
+KTF 
+		APP ID: 8101215B
+PID (T스토어와 동일)
+건즈 스페셜 2권: 0900616512
+건즈 스페셜 3권: 0900616513
+건즈 스페셜 4권: 0900616514
+건즈 스페셜 5권: 0900616515
+        -->
+        <activity
+            android:name="com.android.iabkr.kt"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <meta-data
+                android:name="IABKRITEMS"
+                android:value="AID=8101259D,PID2=0900632621,PID3=0900632622,PID4=0900632624,PID5=0900632625,PID6=0900632626" />
+        </activity>
+        <activity
+            android:name="com.strastar.zolaman.ActStarToonLuncher"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.strastar.zolaman.MainTable"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+            <!--
+            telconame => skt/kt/lgu  
+            <meta-data android:name="telconame" android:value="skt" />
+            -->
+        </activity>
+        <activity
+            android:name="com.strastar.zolaman.CartoonViewFlipper"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="com.feelingk.iap.PwdActivity"
+            android:label="@string/app_name" />
+    </application>
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-sdk android:minSdkVersion="7" />
+
+</manifest>
